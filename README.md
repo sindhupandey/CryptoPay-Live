@@ -1,1 +1,0 @@
-# CryptoPay-Live
