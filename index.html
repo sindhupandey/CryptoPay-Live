@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CryptoPay Live • Global Crypto Payment Gateway</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    .pulse-btn { animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(168,85,247,0.7); } 70% { box-shadow: 0 0 0 15px rgba(168,85,247,0); } 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0); } }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-black text-white min-h-screen">
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const { useState } = React;
+    const App = () => {
+      const [amount, setAmount] = useState('');
+      const [currency, setCurrency] = useState('USD');
+
+      const pay = () => {
+        if (!amount || amount <= 0) return Swal.fire('Enter valid amount', '', 'warning');
+        Swal.fire({ title: 'Connecting...', html: 'Opening wallet', timer: 2000, didOpen: () => Swal.showLoading() });
+        setTimeout(() => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Payment Success!',
+            html: `<b>${amount} ${currency}</b> received<br>Tx: 0x71a2...9f8e`,
+            background: '#1a0033',
+            color: '#fff'
+          });
+        }, 3000);
+      };
+
+      return (
+        <>
+          <header className="sticky top-0 z-50 bg-black/70 backdrop-blur-xl border-b border-purple-500/30">
+            <div className="container mx-auto px-6 py-5 flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <i className="fas fa-coins text-3xl text-yellow-400"></i>
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">CryptoPay Live</h1>
+              </div>
+              <div className="hidden md:flex items-center gap-8 text-sm">
+                <span>ETH • Polygon • BSC</span>
+                <span>0.5% Fee</span>
+                <span className="text-green-400">Live $68K+ Volume</span>
+              </div>
+            </div>
+          </header>
+
+          <main className="container mx-auto px-6 py-20 text-center">
+            <h2 className="text-5xl md:text-7xl font-extrabold mb-6">
+              Accept Crypto Payments<br/>
+              <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">Globally in Seconds</span>
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-300 mb-12">
+              USDT • USDC • ETH • MATIC • BNB • BTC | Instant Fiat Payouts
+            </p>
+
+            <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-2xl rounded-3xl p-10 border border-purple-500/50 shadow-2xl">
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                  <label className="block text-left mb-2">Amount</label>
+                  <input type="number" value={amount} onChange={(e)=>setAmount(e.target.value)} placeholder="100.00" className="w-full px-6 py-4 bg-white/20 rounded-xl text-2xl text-center focus:ring-4 focus:ring-purple-500 outline-none" />
+                </div>
+                <div>
+                  <label className="block text-left mb-2">Currency</label>
+                  <select value={currency} onChange={(e)=>setCurrency(e.target.value)} className="w-full px-6 py-4 bg-white/20 rounded-xl text-xl">
+                    <option>USD</option><option>EUR</option><option>INR</option><option>GBP</option>
+                  </select>
+                </div>
+              </div>
+              <button onClick={pay} className="w-full py-6 text-2xl font-bold rounded-2xl bg-gradient-to-r from-green-500 to-blue-600 hover:scale-105 transition pulse-btn">
+                <i className="fas fa-wallet mr-3"></i> Pay with Wallet
+              </button>
+            </div>
+          </main>
+
+          <footer className="text-center py-12 border-t border-purple-500/30">
+            <p className="text-2xl font-bold">CryptoPay Live • Built by Sindhu Pandey • 2025</p>
+            <p className="text-gray-400">IGDTUW '27 | sindhupandey954@gmail.com</p>
+          </footer>
+        </>
+      );
+    };
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
