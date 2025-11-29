@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.glow { box-shadow: 0 0 30px rgba(139, 92, 246, 0.6); }
+.card-hover { transition: all 0.4s; }
+.card-hover:hover { transform: translateY(-12px) scale(1.02); }
+.pulse-btn { animation: pulse 2s infinite; }
+@keyframes pulse { 
+  0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7); } 
+  70% { box-shadow: 0 0 0 15px rgba(168, 85, 247, 0); } 
+  100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); } 
+}
